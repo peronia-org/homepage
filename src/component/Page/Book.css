@@ -1,0 +1,107 @@
+.book {
+  max-width: 40rem;
+  @apply font-serif;
+  @apply text-gray-700;
+  @apply mx-auto;
+}
+
+.book h1 { @apply text-5xl; @apply my-40; @apply font-bold; }
+.book h2 { @apply text-4xl; @apply my-20; @apply font-bold; }
+.book h3 { @apply text-3xl; @apply my-10; @apply font-bold; }
+.book h4 { @apply text-2xl; @apply my-5; @apply italic; }
+
+.book p { @apply text-2xl; @apply my-3; }
+.book main em { @apply font-light; @apply text-gray-600; }
+
+.book main a { @apply font-light; @apply text-blue-600; }
+
+.book img {
+  margin: 0 auto;
+}
+
+.book table {
+  width: 90%;
+  @apply text-2xl;
+  @apply my-3;
+  @apply mx-auto;
+}
+
+.book blockquote {
+  @apply py-1;
+  @apply px-3;
+  @apply bg-gray-100;
+  @apply text-gray-600;
+  @apply rounded-md;
+  @apply border-l-8;
+  @apply border-gray-300
+}
+
+.book nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 20rem;
+  padding: 4rem 1rem .75rem 0;
+  overflow: auto;
+}
+
+.book nav .index {
+  @apply flex;
+  @apply text-xl;
+  @apply text-gray-400;
+  @apply bg-white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20rem;
+  padding: .75rem 0;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.book nav .index .Icon {
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+
+.book nav ul {
+  opacity: 0;
+}
+
+.book nav:hover .index {
+  @apply text-gray-500;
+}
+
+.book nav:hover ul {
+  opacity: 1;
+}
+
+.book nav ul li a {
+  display: block;
+  padding-top: .25rem;
+  padding-bottom: .25rem;
+  @apply text-gray-700;
+  @apply rounded-r-md;
+}
+
+.book nav ul li.h1 a { padding-left: 1rem; }
+.book nav ul li.h2 a { padding-left: 2rem; }
+.book nav ul li.h3 a { padding-left: 3rem; }
+.book nav ul li.h4 a { padding-left: 4rem; }
+.book nav ul li.h5 a { padding-left: 5rem; }
+.book nav ul li.h6 a { padding-left: 6rem; }
+.book nav ul li a:hover { @apply bg-gray-100; }
+
+@media print {
+  .book h1,
+  .book h2,
+  .book h3,
+  .book table {
+    page-break-before: always;
+  }
+
+  .book nav {
+    display: none;
+  }
+}
