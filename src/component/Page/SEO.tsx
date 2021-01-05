@@ -14,7 +14,7 @@ export default function SEO({
   image,
   largeImage,
   title,
-  ...props,
+  ...props
 }: SEOProps) {
   return (
     <Helmet title={title} {...props}>
