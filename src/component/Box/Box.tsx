@@ -12,7 +12,7 @@ export default function Box({ rotate, ...props }: BoxProps) {
         ? [`-${rotation}`, rotation]
         : [rotation, `-${rotation}`];
     },
-    [rotate || 0],
+    [rotate || 0]
   );
 
   return (

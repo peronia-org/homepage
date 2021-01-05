@@ -113,7 +113,7 @@ function getHeadings(ast: AstRootElement) {
           list.push({
             tagName: child.tagName,
             hash: slug(value),
-            value,
+            value
           });
       }
     }

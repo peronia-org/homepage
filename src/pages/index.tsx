@@ -12,8 +12,8 @@ const books = [
   {
     link: '/books/monopolio-y-competencia/',
     title: 'Monopolio y competencia',
-    author: 'Murray N. Rothbard',
-  },
+    author: 'Murray N. Rothbard'
+  }
 ];
 
 export default (props: any) => {
@@ -36,7 +36,7 @@ export default (props: any) => {
             className="w-full transform bg-gray-900 bg-left-bottom bg-no-repeat h-80"
             style={{
               backgroundImage: `url("${peron}")`,
-              backgroundSize: '20rem',
+              backgroundSize: '20rem'
             }}
           >
             <div
@@ -73,7 +73,7 @@ export default (props: any) => {
           className="w-full h-40 transform bg-blue-900 bg-left-bottom bg-no-repeat"
           style={{
             backgroundImage: `url("${bookLover}")`,
-            backgroundSize: '10rem',
+            backgroundSize: '10rem'
           }}
         >
           <div
