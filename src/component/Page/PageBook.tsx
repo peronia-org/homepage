@@ -1,32 +1,19 @@
 import React from 'react';
-import { Helmet } from "react-helmet"
+import { Helmet } from 'react-helmet';
 import { graphql } from 'gatsby';
-import slug from 'slug'
+import slug from 'slug';
 
 import './Book.css';
-import Menu from '../Icon/Menu';
-import Logo from '../Peronia/Logo';
 
 export default function PageBook(props: any) {
   const htmlAst = props.data.book.htmlAst as AstRootElement;
+  const headings = getHeadings(htmlAst);
+  const title = headings.find(head => head.tagName === 'h1').value;
 
-  // const headings = props.data.book.headings as {
-  //   depth: number;
-  //   value: string;
-  // }[];
-
-  // const wordCount = props.data.book.wordCount as {
-  //   paragraphs: number;
-  //   sentences: number;
-  //   words: number;
-  // };
-
-  const headings = getHeadings(htmlAst)
-  const title = headings.find(head => head.tagName === 'h1').value
-
+  // return null;
   return (
     <div className="book">
-      <Helmet title={title + ' | peronia.org'} ></Helmet>
+      <Helmet title={`${title} | peronia.org`} />
       {/* {headings.length > 0 && <nav>
         <div className="index">
           <Logo />
@@ -46,13 +33,20 @@ export default function PageBook(props: any) {
   );
 }
 
-type AstTextElement = { type: 'text', value: string }
-type AstHtmlElement = { type: 'element', tagName: string, properties: Record<string, string | number | boolean>, children: AstHtmlElement[] }
-type AstRootElement = { type: 'root', children: (AstTextElement | AstHtmlElement)[] }
-type AstElement = AstTextElement | AstHtmlElement | AstRootElement
+type AstTextElement = { type: 'text'; value: string };
+type AstHtmlElement = {
+  type: 'element';
+  tagName: string;
+  properties: Record<string, string | number | boolean>;
+  children: AstHtmlElement[];
+};
+type AstRootElement = {
+  type: 'root';
+  children: (AstTextElement | AstHtmlElement)[];
+};
+type AstElement = AstTextElement | AstHtmlElement | AstRootElement;
 
-function Element(ast: AstElement): JSX.Element {
-
+function Element(ast: AstElement) {
   switch (ast.type) {
     case 'element':
       const Tag = ast.tagName as any;
@@ -68,14 +62,18 @@ function Element(ast: AstElement): JSX.Element {
         case 'h4':
         case 'h5':
         case 'h6':
-          return <Tag id={getHash(ast)} {...ast.properties}>{ElementList(ast)}</Tag>
+          return (
+            <Tag id={getHash(ast)} {...ast.properties}>
+              {ElementList(ast)}
+            </Tag>
+          );
 
         default:
-          return <Tag {...ast.properties}>{ElementList(ast)}</Tag>
+          return <Tag {...ast.properties}>{ElementList(ast)}</Tag>;
       }
 
     case 'text':
-      return <>{ast.value}</>;
+      return <React.Fragment>{ast.value}</React.Fragment>;
 
     default:
       return null;
@@ -84,23 +82,23 @@ function Element(ast: AstElement): JSX.Element {
 
 function getText(ast: AstElement) {
   if (ast.type === 'text') {
-    return ast.value
+    return ast.value;
   }
 
-  let result = ''
+  let result = '';
   for (const child of ast.children) {
-    result += getText(child)
+    result += getText(child);
   }
 
-  return result
+  return result;
 }
 
 function getHash(ast: AstHtmlElement) {
-  return slug(ast.children.map(child => getText(child)).join(''))
+  return slug(ast.children.map(child => getText(child)).join(''));
 }
 
 function getHeadings(ast: AstRootElement) {
-  const list = [] as { tagName: string, hash: string, value: string }[]
+  const list = [] as { tagName: string; hash: string; value: string }[];
 
   for (const child of ast.children) {
     if (child.type === 'element') {
@@ -111,23 +109,21 @@ function getHeadings(ast: AstRootElement) {
         case 'h4':
         case 'h5':
         case 'h6':
-          const value = getText(child)
+          const value = getText(child);
           list.push({
             tagName: child.tagName,
             hash: slug(value),
             value,
-          })
+          });
       }
     }
   }
 
-  return list
+  return list;
 }
 
 function ElementList(ast: AstHtmlElement) {
-  return ast.children.map((el: any, i: number) => (
-    <Element key={i} {...el} />
-  ))
+  return ast.children.map((el: any, i: number) => <Element key={i} {...el} />);
 }
 
 export const pageQuery = graphql`

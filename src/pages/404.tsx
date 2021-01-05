@@ -2,11 +2,11 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import PageLayout from '../component/Page/PageLayout';
 
-const notFound = require('../images/undraw/page_not_found.svg')
+const notFound = require('../images/undraw/page_not_found.svg');
 
 export default () => (
   <PageLayout>
-    <Helmet title={'peronia.org'} ></Helmet>
+    <Helmet title={'peronia.org'} />
     {/* <h1>NOT FOUND</h1>
     <p>You just hit a route that doesn&#39;t exist... the sadness.</p> */}
     <div className="hero">
