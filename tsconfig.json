@@ -1,15 +1,5 @@
 {
-    "compilerOptions": {
-        "outDir": "./dist/",
-        "sourceMap": true,
-        "noImplicitAny": true,
-        "module": "commonjs",
-        "target": "esnext",
-        "esModuleInterop": true,
-        "jsx": "react",
-        "lib": ["dom", "es2015", "es2017"]
-    },
-    "include": [
-        "./src/**/*"
-    ]
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"]
 }
